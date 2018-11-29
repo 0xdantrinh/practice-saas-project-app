@@ -1,9 +1,19 @@
 Rails.application.routes.draw do
 
+  resources :user_projects
   resources :artifacts
   resources :tenants do
-    resources :projects
+
+    resources :projects do
+
+      get 'users', on: :member
+
+      put 'add_user', on: :member
+
+    end
+
   end
+
   resources :members
   get 'home/index'
   root :to => "home#index"
